@@ -15,7 +15,7 @@ const helmet =require('helmet')
 const xss = require('xss-clean');
 const mongoSanitize =require('express-mongo-sanitize')
 
-const connectDB =require('./db/connect.js')
+const connectDB =require('./db/connect')
 
 // routes
 const authRouter =require('./routes/authRoutes')
