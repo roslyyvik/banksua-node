@@ -4,6 +4,7 @@ const { StatusCodes } = require('http-status-codes')
 
 const getAllIndicators = async (req, res) => {
   const indicators = await Indicator.find({})
+  // res.status(StatusCodes.OK).json({ indicators, count: indicator.length })
   res.status(StatusCodes.OK).json(indicators)
 }
 
