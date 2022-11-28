@@ -55,7 +55,7 @@ app.use('/api/v1/indicators', indicatorRouter)
 app.use(notFoundMiddleware)
 app.use(errorHandlerMiddleware)
 
-const port = process.env.PORT || 5000
+const port = process.env.PORT || 5500
 
 const start = async () => {
   try {
