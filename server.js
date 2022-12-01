@@ -10,6 +10,7 @@ const cookieParser = require('cookie-parser')
 const fileUpload = require('express-fileupload')
 
 const cors = require('cors')
+const corsOptions = require('./config/corsOption')
 const rateLimiter = require('express-rate-limit')
 const helmet =require('helmet')
 const xss = require('xss-clean');
@@ -36,7 +37,7 @@ app.use(
   })
 );
 app.use(helmet())
-app.use(cors())
+app.use(cors(corsOptions))
 app.use(xss())
 app.use(mongoSanitize())
 
