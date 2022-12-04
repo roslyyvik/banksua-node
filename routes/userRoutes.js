@@ -24,7 +24,7 @@ router
 
 router
   .route('/showMe')
-  .get(apiLimiter, authenticateUser, showCurrentUser)
+  .get(authenticateUser, showCurrentUser)
 
 router
   .route('/updateUser')
