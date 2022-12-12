@@ -7,7 +7,14 @@ const apiLimiter = rateLimiter({
   max: 10,
   message: 'Too many requests from require this IP, please try again after 15 minutes',
 })
-const { register, login, logout } = require('../controllers/authController.js')
+const { 
+  register, 
+  login, 
+  logout,
+  verifyEmail,
+  forgotPassword,
+  resetPassword,
+} = require('../controllers/authController.js')
 // const {authenticateUser} = require('../middleware/authentication')
 
 router
@@ -20,7 +27,12 @@ router
 
 router
   .route('/logout')
-  .get(logout)
-  // .delete(authenticateUser, logout)
+  .delete(authenticateUser, logout)
 
+router
+  .post('/verify-email', verifyEmail);
+router
+  .post('/reset-password', resetPassword);
+router
+  .post('/forgot-password', forgotPassword);
 module.exports = router
