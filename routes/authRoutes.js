@@ -15,7 +15,7 @@ const {
   forgotPassword,
   resetPassword,
 } = require('../controllers/authController.js')
-// const {authenticateUser} = require('../middleware/authentication')
+const {authenticateUser} = require('../middleware/authentication')
 
 router
   .route('/register')
