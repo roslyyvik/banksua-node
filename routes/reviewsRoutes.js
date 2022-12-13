@@ -12,7 +12,6 @@ const {
   getSingleReview,
   updateReview,
   deleteReview,
-  getSingleBankReviews,
 } = require('../controllers/reviewController.js')
 const {
   authenticateUser

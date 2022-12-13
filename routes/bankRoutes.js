@@ -12,6 +12,7 @@ const { getAllBanks, getSingleBank } = require('../controllers/bankController')
 const {
   authenticateUser
 } = require('../middleware/authentication')
+const { getSingleBankReviews } = require('../controllers/reviewController')
 
 router
   .route('/')
@@ -19,6 +20,10 @@ router
 
 router
   .route('/:mfo')
-  .get(getSingleBank)
+  .get(authenticateUser, getSingleBank)
+
+router
+  .route('/:mfo/reviews')
+  .get(getSingleBankReviews)
 
 module.exports = router
