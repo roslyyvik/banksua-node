@@ -34,7 +34,8 @@ const register = async (req, res) => {
     pic,
     // cloudinary_id,
   });
-  const origin = 'http://localhost:3000';
+  const origin = 'https://banksua.onrender.com'
+  // const origin = 'http://localhost:3000';
   // const newOrigin = 'https://react-node-user-workflow-front-end.netlify.app';
 
   // const tempOrigin = req.get('origin');
