@@ -30,7 +30,7 @@ const UserSchema = new mongoose.Schema({
   },
   pic: {
     type: String,
-    default:"images/default-avatar.svg"
+    default:"https://res.cloudinary.com/rosvikimage/image/upload/v1679152819/default-avatar_xgr0ae.svg"
   },
   cloudinary_id: {
     type: String,
