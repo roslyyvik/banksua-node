@@ -19,12 +19,12 @@ const {
 
 router
   .route('/')
-  .post(apiLimiter, authenticateUser,createReview )
-  .get(apiLimiter, getAllReviews)
+  .post( authenticateUser,createReview )
+  .get( getAllReviews)
 
 router
   .route('/:id')
-  .get(apiLimiter, getSingleReview)
+  .get( getSingleReview)
   .patch(authenticateUser, updateReview )
   .delete(authenticateUser, deleteReview)
 

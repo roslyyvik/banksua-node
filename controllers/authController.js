@@ -12,7 +12,7 @@ const {
 const crypto = require('crypto');
 
 const register = async (req, res) => {
-  const { email, name, password } = req.body;
+  const { email, name, password, pic } = req.body;
 
   const emailAlreadyExists = await User.findOne({ email });
   if (emailAlreadyExists) {
@@ -31,9 +31,10 @@ const register = async (req, res) => {
     password,
     role,
     verificationToken,
+    pic,
+    // cloudinary_id,
   });
-  const origin = 'https://banksua.onrender.com'
-  // const origin = 'http://localhost:3000';
+  const origin = 'http://localhost:3000';
   // const newOrigin = 'https://react-node-user-workflow-front-end.netlify.app';
 
   // const tempOrigin = req.get('origin');
@@ -52,9 +53,6 @@ const register = async (req, res) => {
   res.status(StatusCodes.CREATED).json({
     msg: 'Success! Please check your email to verify account',
   });
-  // const tokenUser = createTokenUser(user)
-  // attachCookiesToResponse({ res, user: tokenUser })
-  // res.status(StatusCodes.CREATED).json({ user: tokenUser})
 };
 
 const verifyEmail = async (req, res) => {
@@ -99,10 +97,10 @@ const login = async (req, res) => {
   const tokenUser = createTokenUser(user);
 
   // create refresh token
-   let refreshToken = '';
-  // // check for existing token
+  let refreshToken = '';
+  // check for existing token
   const existingToken = await Token.findOne({ user: user._id });
-  
+
   if (existingToken) {
     const { isValid } = existingToken;
     if (!isValid) {
@@ -125,11 +123,9 @@ const login = async (req, res) => {
 
   res.status(StatusCodes.OK).json({ user: tokenUser });
 };
-
 const logout = async (req, res) => {
-
   await Token.findOneAndDelete({ user: req.user.userId });
-  
+
   res.cookie('accessToken', 'logout', {
     httpOnly: true,
     expires: new Date(Date.now()),
@@ -138,10 +134,6 @@ const logout = async (req, res) => {
     httpOnly: true,
     expires: new Date(Date.now()),
   });
-  // res.cookie('token', 'logout', {
-  //   httpOnly: true,
-  //   expires: new Date(Date.now() + 1000),
-  // });
   res.status(StatusCodes.OK).json({ msg: 'user logged out!' });
 };
 
@@ -208,4 +200,3 @@ module.exports = {
   forgotPassword,
   resetPassword,
 };
-

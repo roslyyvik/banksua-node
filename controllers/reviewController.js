@@ -12,15 +12,15 @@ const createReview = async (req, res) => {
     throw new CustomError.NotFoundError(`No bank with id : ${bankId}`)
   }
 
-  const alreadySubmitted = await Review.findOne({ 
+  const alreadySubmitted = await Review.findOne({
     bank: bankId,
     user: req.user.userId,
    })
-  
+
   if(alreadySubmitted) {
     throw new CustomError.BadRequestError(
       'Already submitted review for this bank'
-    )    
+    )
   }
   req.body.user = req.user.userId
   const review = await Review.create(req.body)
@@ -34,6 +34,11 @@ const getAllReviews = async (req, res) => {
       path: 'bank',
       select: 'SHORTNAME MFO',
     })
+    .populate({
+      path: 'user',
+      select: '_id name',
+    })
+    .sort('-createdAt')
   res.status(StatusCodes.OK).json({ reviews, count: reviews.length })
 }
 
@@ -77,7 +82,27 @@ const deleteReview = async (req, res) => {
 
 const getSingleBankReviews = async (req, res) => {
   const { id: bankId } = req.params
-  const reviews = await Review.find({ bank: bankId })
+  const reviews = await Review
+    .find({ bank: bankId })
+    .populate({
+      path: 'bank',
+      select: 'SHORTNAME MFO',
+    })
+    .populate({
+      path: 'user',
+      select: '_id name',
+    })
+    .sort('-createdAt')
+
+  res.status(StatusCodes.OK).json({ reviews, count: reviews.length })
+}
+
+const getSingleUserReviews = async (req, res) => {
+  const { id: userId } = req.params
+  const reviews = await Review
+    .find({ user: userId })
+    .populate("bank", "_id SHORTNAME")
+    .sort('-createdAt')
   res.status(StatusCodes.OK).json({ reviews, count: reviews.length })
 }
 
@@ -88,4 +113,5 @@ module.exports = {
   updateReview,
   deleteReview,
   getSingleBankReviews,
+  getSingleUserReviews,
 }

@@ -7,9 +7,9 @@ const apiLimiter = rateLimiter({
   max: 10,
   message: 'Too many requests from require this IP, please try again after 15 minutes',
 })
-const { 
-  register, 
-  login, 
+const {
+  register,
+  login,
   logout,
   verifyEmail,
   forgotPassword,
@@ -23,7 +23,7 @@ router
 
 router
   .route('/login')
-  .post(apiLimiter, login)
+  .post(login)
 
 router
   .route('/logout')

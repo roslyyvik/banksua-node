@@ -8,7 +8,7 @@ const apiLimiter = rateLimiter({
   message: 'Too many requests this IP, please try again after 15 minutes',
 })
 
-const { getAllBanks, getSingleBank } = require('../controllers/bankController')
+const { getAllBanks, getSingleBank, getSingleIdBank } = require('../controllers/bankController')
 const {
   authenticateUser
 } = require('../middleware/authentication')
@@ -17,10 +17,13 @@ const { getSingleBankReviews } = require('../controllers/reviewController')
 router
   .route('/')
   .get(getAllBanks)
-
 router
   .route('/:mfo')
-  .get(authenticateUser, getSingleBank)
+  .get( getSingleBank)
+
+router
+  .route('/idbank/:id')
+  .get(authenticateUser, getSingleIdBank)
 
 router
   .route('/:mfo/reviews')

@@ -27,11 +27,11 @@ const ReviewSchema = new mongoose.Schema({
     ref: 'Bank',
     required: true
   },
-},{timestamp: true}
+},{timestamps:true}
 )
 ReviewSchema.index({ bank: 1, user: 1 }, { unique: true })
 
-ReviewSchema.static.calculateAverageRating = async function(bankId) {
+ReviewSchema.statics.calculateAverageRating = async function(bankId) {
   const result = await this.aggregate([
     { $match: { bank: bankId } },
     {
@@ -43,7 +43,7 @@ ReviewSchema.static.calculateAverageRating = async function(bankId) {
     },
   ])
   try {
-    await this.modal('Bank').findOneAndUpdate(
+    await this.model('Bank').findOneAndUpdate(
       {_id: bankId},
       {
         averageRating: Math.ceil(result[0]?.averageRating || 0),
