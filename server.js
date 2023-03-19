@@ -42,7 +42,7 @@ app.use(
   })
 );
 app.use(helmet())
-app.use(cors())
+app.use(cors(corsOptions))
 app.use(xss())
 app.use(mongoSanitize())
 
