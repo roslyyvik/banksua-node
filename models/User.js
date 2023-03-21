@@ -35,12 +35,12 @@ const UserSchema = new mongoose.Schema({
   cloudinary_id: {
     type: String,
   },
-  verificationToken: String,
-  isVerified: {
-    type: Boolean,
-    default: false,
-  },
-  verified: Date,
+  // verificationToken: String,
+  // isVerified: {
+  //   type: Boolean,
+  //   default: false,
+  // },
+  // verified: Date,
   passwordToken: {
     type: String,
   },

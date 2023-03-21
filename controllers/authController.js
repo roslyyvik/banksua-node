@@ -30,11 +30,11 @@ const register = async (req, res) => {
     email,
     password,
     role,
-    verificationToken,
+    // verificationToken,
     pic,
     // cloudinary_id,
   });
-  const origin = 'https://banksua.onrender.com'
+  // const origin = 'https://banksua.onrender.com'
   // const origin = 'http://localhost:3000';
   // const newOrigin = 'https://react-node-user-workflow-front-end.netlify.app';
 
@@ -44,15 +44,18 @@ const register = async (req, res) => {
   // const forwardedHost = req.get('x-forwarded-host');
   // const forwardedProtocol = req.get('x-forwarded-proto');
 
-  await sendVerificationEmail({
-    name: user.name,
-    email: user.email,
-    verificationToken: user.verificationToken,
-    origin,
-  });
+  // await sendVerificationEmail({
+  //   name: user.name,
+  //   email: user.email,
+  //   verificationToken: user.verificationToken,
+  //   origin,
+  // });
   // send verification token back only while testing in postman!!!
+  // res.status(StatusCodes.CREATED).json({
+  //   msg: 'Success! Please check your email to verify account',
+  // });
   res.status(StatusCodes.CREATED).json({
-    msg: 'Success! Please check your email to verify account',
+    msg: 'Success! User Created!',
   });
 };
 
@@ -92,9 +95,9 @@ const login = async (req, res) => {
   if (!isPasswordCorrect) {
     throw new CustomError.UnauthenticatedError('Invalid Credentials');
   }
-  if (!user.isVerified) {
-    throw new CustomError.UnauthenticatedError('Please verify your email');
-  }
+  // if (!user.isVerified) {
+  //   throw new CustomError.UnauthenticatedError('Please verify your email');
+  // }
   const tokenUser = createTokenUser(user);
 
   // create refresh token
