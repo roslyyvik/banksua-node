@@ -42,7 +42,10 @@ app.use(
   })
 );
 app.use(helmet())
-app.use(cors())
+app.use(cors({
+  origin: ['https://banksua.onrender.com', 'http://localhost:3000']
+  })
+)
 app.use(xss())
 app.use(mongoSanitize())
 
