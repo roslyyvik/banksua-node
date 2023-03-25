@@ -61,6 +61,10 @@ app.use('/api/v1/reviews', reviewRouter)
 app.use('/api/v1/users', userRouter)
 app.use('/api/v1/indicators', indicatorRouter)
 
+app.get('/', (req, res) => {
+  res.send('Server is Started!')
+})
+
 app.use(notFoundMiddleware)
 app.use(errorHandlerMiddleware)
 
